@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.ndp.mapper.Hardware_SpecsMapper">
+
+    	<insert id="insertHardwareSpecs" parameterType="com.ndp.vo.Hardware_SpecsVO">
+		    INSERT INTO hardware_specs
+		        (node_id, cpu_model, cpucores, gpu_model, gpu_vram_gb, total_ram_gb, storage_type, storage_total_gb)
+		    VALUES
+		        (#{node_id}, #{cpu_model}, #{cpucores}, #{gpu_model}, #{gpu_vram_gb}, #{total_ram_gb}, #{storage_type}, #{storage_total_gb});
+		</insert>
+		
+		<select id="checkHardwareSpecsExists" resultType="int" parameterType="String">
+		    SELECT COUNT(1)
+		    FROM hardware_specs
+		    WHERE node_id = #{node_id}
+		</select>
+
+    
+</mapper>

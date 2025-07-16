@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.ndp.mapper.Node_UsageMapper">
+
+    	<insert id="insertInitialNodeUsage" parameterType="String">
+		    INSERT INTO telementry_spec_status (
+		        node_id
+		    )
+		    VALUES (
+		        #{node_id}
+		    )
+		</insert>
+		
+		<update id="updateNodeUsageByNodeId" parameterType="com.ndp.vo.Node_UsageVO">
+			    UPDATE telementry_spec_status
+			    SET
+			        cpu_usage_percent   = #{cpu_usage_percent},
+					mem_usage_percent   = #{mem_usage_percent},
+					gpu_usage_percent   = #{gpu_usage_percent},
+					gpu_temp            = #{gpu_temp},
+					used_storage_gb     = #{used_storage_gb},
+					ssd_health_percent  = #{ssd_health_percent},
+					timestamp           = NOW()
+
+			    WHERE
+			        node_id = #{node_id}
+			</update>
+
+    
+</mapper>
