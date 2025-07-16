@@ -31,7 +31,7 @@ public class AgentController {
 	
 	@PostMapping("/nodes/register")
 	public ResponseEntity<String> registerAgent(@RequestBody Map<String, Object> request) {
-
+		System.out.println("레지스터 호출");
 	    // 1️⃣ node_id 추출 및 검증
 	    String nodeId = (String) request.get("node_id");
 
@@ -44,7 +44,7 @@ public class AgentController {
 	    }
 
 	    agentService.updateNodeStatus(nodeId, "active");
-
+	    System.out.println("레지스터 node_id 검증 완료");
 	    // 2️⃣ 하드웨어 스펙 처리
 	    @SuppressWarnings("unchecked")
 	    Map<String, Object> hw = (Map<String, Object>) request.get("hardware_specs");
@@ -65,6 +65,7 @@ public class AgentController {
 
 	        agentService.saveHardwareSpecs(specsVO);
 	        agentService.insertInitialNodeUsageRow(nodeId);
+	        System.out.println("칼럼 세팅 완료");
 
 	    }
 

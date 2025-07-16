@@ -27,6 +27,12 @@
 			    WHERE
 			        node_id = #{node_id}
 			</update>
+			
+			<select id="getAllused" resultType="com.ndp.vo.Node_UsageVO">
+			    SELECT *
+			    FROM telementry_spec_status
+			    ORDER BY id DESC
+			</select>
 
     
 </mapper>

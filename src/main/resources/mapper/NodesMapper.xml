@@ -18,6 +18,12 @@
 	    FROM nodes
 	    WHERE node_id = #{node_id}
 	</select>
+	
+	<select id="getAllNodes" resultType="com.ndp.vo.NodesVO">
+	    SELECT *
+	    FROM nodes
+	    ORDER BY id DESC
+	</select>
 
 
     	

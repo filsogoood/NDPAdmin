@@ -16,6 +16,12 @@
 		    FROM hardware_specs
 		    WHERE node_id = #{node_id}
 		</select>
+		
+		<select id="getAllspecs" resultType="com.ndp.vo.Hardware_SpecsVO">
+		    SELECT *
+		    FROM hardware_specs
+		    ORDER BY id DESC
+		</select>
 
     
 </mapper>
