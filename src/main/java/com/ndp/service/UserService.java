@@ -1,8 +1,14 @@
 package com.ndp.service;
 
 import com.ndp.config.JwtUtil;
+import com.ndp.mapper.NodesMapper;
 import com.ndp.mapper.UserInfoMapper;
+import com.ndp.vo.NodesVO;
 import com.ndp.vo.UserInfoVO;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +17,32 @@ public class UserService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
+    @Autowired
+    private NodesMapper nodesMapper;
 
     public String login(String userId, String password) {
         UserInfoVO user = userInfoMapper.selectUserById(userId);
 
         if (user != null && password.equals(user.getPassword())) {
-            return JwtUtil.generateToken(user.getUserUuid());
+            return JwtUtil.generateToken(user.getUserUuid(), user.getUserId());
         }
 
         return null;  // 로그인 실패 시
     }
+    
+  /*  public String registerNode(String userUuid) {
+        String nodeId = UUID.randomUUID().toString();
+
+        NodesVO node = new NodesVO();
+        node.setNode_id(nodeId);
+        node.setUser_uuid(userUuid);
+        node.setStatus("pre");
+        node.setCreate_at(LocalDateTime.now());
+        node.setUpdate_at(LocalDateTime.now());
+
+        nodesMapper.insertNode(node);
+
+        return nodeId;
+    }*/
+    
 }
