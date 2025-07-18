@@ -12,6 +12,8 @@ public class NodesVO {
     private String status;
     private LocalDateTime create_at;
     private LocalDateTime update_at;
+    private String node_name;
+    private String nanodc_id;
     
    
 
@@ -62,6 +64,22 @@ public class NodesVO {
     public void setId(int id) {
         this.id = id;
     }
+
+	public String getNode_name() {
+		return node_name;
+	}
+
+	public void setNode_name(String node_name) {
+		this.node_name = node_name;
+	}
+
+	public String getNanodc_id() {
+		return nanodc_id;
+	}
+
+	public void setNanodc_id(String nanodc_id) {
+		this.nanodc_id = nanodc_id;
+	}
 
     
 

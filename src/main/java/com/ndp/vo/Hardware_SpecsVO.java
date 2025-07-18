@@ -14,12 +14,40 @@ public class Hardware_SpecsVO {
     private String total_ram_gb;
     private String storage_type;
     private String storage_total_gb;
+    private String cpu_count;
+    private String gpu_count;
+    private String nvme_count;
+    private String nanodc_id;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public String getCpu_count() {
+		return cpu_count;
+	}
+
+	public void setCpu_count(String cpu_count) {
+		this.cpu_count = cpu_count;
+	}
+
+	public String getGpu_count() {
+		return gpu_count;
+	}
+
+	public void setGpu_count(String gpu_count) {
+		this.gpu_count = gpu_count;
+	}
+
+	public String getNvme_count() {
+		return nvme_count;
+	}
+
+	public void setNvme_count(String nvme_count) {
+		this.nvme_count = nvme_count;
+	}
+
+	public void setId(int id) {
         this.id = id;
     }
 
@@ -87,5 +115,13 @@ public class Hardware_SpecsVO {
 
 	public void setCpucores(String cpucores) {
 		this.cpucores = cpucores;
+	}
+
+	public String getNanodc_id() {
+		return nanodc_id;
+	}
+
+	public void setNanodc_id(String nanodc_id) {
+		this.nanodc_id = nanodc_id;
 	}
 }

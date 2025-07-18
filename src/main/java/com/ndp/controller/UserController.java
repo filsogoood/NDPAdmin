@@ -1,7 +1,12 @@
 package com.ndp.controller;
 
+import com.ndp.config.JwtUtil;
 import com.ndp.service.UserService;
-
+import com.ndp.vo.Hardware_SpecsVO;
+import com.ndp.vo.NanodcVO;
+import com.ndp.vo.Ndp_TokenVO;
+import com.ndp.vo.Node_UsageVO;
+import com.ndp.vo.NodesVO;
 import com.ndp.vo.UserInfoVO;
 
 import lombok.RequiredArgsConstructor;
@@ -39,5 +44,34 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
-   
+    
+    @GetMapping("/data")
+    public ResponseEntity<Map<String, Object>> getDashboardData(@RequestHeader("Authorization") String authHeader) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        // 1. 토큰 추출 및 검증
+        String token = authHeader.replace("Bearer ", "");
+        if (!JwtUtil.validateToken(token)) {
+            response.put("error", "Invalid or expired token");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+
+        // 2. 데이터 가져오기
+        List<NodesVO> nodes = userService.getAllNodes();
+        List<Node_UsageVO> usage = userService.getAllused();
+        List<Hardware_SpecsVO> specs = userService.getAllspecs();
+        List<NanodcVO> nanodc = userService.getAllnanodc();
+        List<Ndp_TokenVO> ndp_list = userService.getAllndp();
+
+        // 3. JSON으로 묶기
+        response.put("nodes", nodes);
+        response.put("node_usage", usage);
+        response.put("hardware_specs", specs);
+        response.put("nanodc", nanodc);
+        response.put("ndp_list",ndp_list);
+
+        return ResponseEntity.ok(response);
+    }
+
 }

@@ -2,10 +2,14 @@ package com.ndp.service;
 
 import com.ndp.config.JwtUtil;
 import com.ndp.mapper.Hardware_SpecsMapper;
+import com.ndp.mapper.NanodcMapper;
+import com.ndp.mapper.Ndp_TokenMapper;
 import com.ndp.mapper.Node_UsageMapper;
 import com.ndp.mapper.NodesMapper;
 import com.ndp.mapper.UserInfoMapper;
 import com.ndp.vo.Hardware_SpecsVO;
+import com.ndp.vo.NanodcVO;
+import com.ndp.vo.Ndp_TokenVO;
 import com.ndp.vo.Node_UsageVO;
 import com.ndp.vo.NodesVO;
 import com.ndp.vo.UserInfoVO;
@@ -28,6 +32,11 @@ public class UserService {
     private Node_UsageMapper node_UsageMapper;
     @Autowired
     private Hardware_SpecsMapper hardware_SpecsMapper;
+    @Autowired
+    private NanodcMapper nanodcMapper;
+    @Autowired
+    private Ndp_TokenMapper ndp_TokenMapper;
+    
 
     public String login(String userId, String password) {
         UserInfoVO user = userInfoMapper.selectUserById(userId);
@@ -47,6 +56,14 @@ public class UserService {
     }
     public List<Hardware_SpecsVO> getAllspecs() {
         return hardware_SpecsMapper.getAllspecs();
+    }
+    
+    public List<NanodcVO> getAllnanodc() {
+        return nanodcMapper.getAllnanodc();
+    }
+    
+    public List<Ndp_TokenVO> getAllndp() {
+        return ndp_TokenMapper.getAllndp();
     }
     
   /*  public String registerNode(String userUuid) {

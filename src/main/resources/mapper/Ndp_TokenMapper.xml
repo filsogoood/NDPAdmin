@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.ndp.mapper.NanodcMapper">
-	<select id="getAllnanodc" resultType="com.ndp.vo.NanodcVO">
+<mapper namespace="com.ndp.mapper.Ndp_TokenMapper">
+	
+	<select id="getAllndp" resultType="com.ndp.vo.Ndp_TokenVO">
 		    SELECT *
-		    FROM nanodc
+		    FROM ndp_token_info
 		    ORDER BY id DESC
 		</select>
-
     	
     
 </mapper>

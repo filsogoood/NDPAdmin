@@ -15,6 +15,9 @@ public interface Node_UsageMapper {
 	public int insertInitialNodeUsage(@Param("node_id") String nodeId);
 	public int updateNodeUsageByNodeId(Node_UsageVO nodeUsageVO);
 	public List<Node_UsageVO> getAllused();
+	public int isNodeExists(@Param("node_id") String nodeId);
+	public List<Node_UsageVO> getAllNodeTimestamps();
+
 
 
 }

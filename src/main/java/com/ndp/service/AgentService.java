@@ -10,7 +10,9 @@ import com.ndp.vo.Node_UsageVO;
 import com.ndp.vo.NodesVO;
 import com.ndp.vo.UserInfoVO;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,6 +84,34 @@ public class AgentService {
             return "fail";
         }
     }
+    
+    public boolean isNodeExists_usage(String nodeId) {
+        return node_UsageMapper.isNodeExists(nodeId) > 0;
+    }
+    public String getNanodcIdByNodeId(String nodeId) {
+        return nodesMapper.getNanodcIdByNodeId(nodeId);
+    }
+    
+    public String getStatusIdByNodeId(String nodeId) {
+        return nodesMapper.getStatusIdByNodeId(nodeId);
+    }
+    
+    public void updateStaleNodesToPre() {
+        List<Node_UsageVO> nodeList = node_UsageMapper.getAllNodeTimestamps();
+
+        for (Node_UsageVO node : nodeList) {
+            LocalDateTime timestamp = node.getTimestamp();
+            long seconds = Duration.between(timestamp, LocalDateTime.now()).getSeconds();
+
+            if (seconds > 300) {  // 5분 초과
+            	updateNodeStatus(node.getNode_id(), "pre");
+            }
+        }
+    }
+
+
+    
+    
 
     
     

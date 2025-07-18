@@ -19,6 +19,19 @@
 	    WHERE node_id = #{node_id}
 	</select>
 	
+	<select id="getNanodcIdByNodeId" resultType="String" parameterType="String">
+	    SELECT nanodc_uuid
+	    FROM nodes
+	    WHERE node_id = #{node_id}
+	</select>
+	
+	<select id="getStatusIdByNodeId" resultType="String" parameterType="String">
+	    SELECT status
+	    FROM nodes
+	    WHERE node_id = #{node_id}
+	</select>
+
+	
 	<select id="getAllNodes" resultType="com.ndp.vo.NodesVO">
 	    SELECT *
 	    FROM nodes

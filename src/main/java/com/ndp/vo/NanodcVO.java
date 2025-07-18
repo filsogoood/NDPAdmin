@@ -6,7 +6,7 @@ import java.util.Date;
 @Data
 public class NanodcVO {
 	private int id;
-	private String node_id;
+	private String nanodc_id;
 	private String country;
 	private String address;
 	private String ip;
@@ -20,12 +20,7 @@ public class NanodcVO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNode_id() {
-		return node_id;
-	}
-	public void setNode_id(String node_id) {
-		this.node_id = node_id;
-	}
+
 	public String getCountry() {
 		return country;
 	}
@@ -61,6 +56,12 @@ public class NanodcVO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getNanodc_id() {
+		return nanodc_id;
+	}
+	public void setNanodc_id(String nanodc_id) {
+		this.nanodc_id = nanodc_id;
 	}
 	
 }

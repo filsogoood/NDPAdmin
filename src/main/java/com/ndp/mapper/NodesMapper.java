@@ -14,4 +14,7 @@ public interface NodesMapper {
 	public int updateNodeStatusByNodeId(NodesVO nodesVO);
 	public int checkNodeExists(String nodeId);
 	public List<NodesVO> getAllNodes();
+	public String getNanodcIdByNodeId(String nodeId);
+	public String getStatusIdByNodeId(String nodeId);
+
 }

@@ -13,13 +13,12 @@ public class JwtUtil {
 
     public static String generateToken(String userUuid, String userId) {
         return Jwts.builder()
-                .setSubject(userUuid)  // UUID를 subject로
-                .claim("user_id", userId)  // user_id 클레임으로 포함
+                .setSubject(userUuid)
+                .claim("user_id", userId)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(key)
                 .compact();
     }
-
 
     public static String getUserUuidFromToken(String token) {
         return Jwts.parserBuilder()
@@ -29,5 +28,17 @@ public class JwtUtil {
                 .getBody()
                 .getSubject();
     }
-}
 
+    // ✅ 검증 메서드 추가
+    public static boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token);
+            return true;  // 유효
+        } catch (Exception e) {
+            return false; // 유효하지 않음 (서명 불일치, 만료 등)
+        }
+    }
+}

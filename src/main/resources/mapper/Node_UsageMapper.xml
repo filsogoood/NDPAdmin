@@ -33,6 +33,15 @@
 			    FROM telementry_spec_status
 			    ORDER BY id DESC
 			</select>
+			
+			<select id="isNodeExists" parameterType="String" resultType="int">
+			    SELECT COUNT(*) FROM node_usage WHERE node_id = #{node_id}
+			</select>
+			
+			<select id="getAllNodeTimestamps" resultType="com.ndp.vo.Node_UsageVO">
+			    SELECT node_id, timestamp
+			    FROM telementry_spec_status
+</select>
 
     
 </mapper>

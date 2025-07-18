@@ -50,7 +50,7 @@ public class AgentController {
 	    Map<String, Object> hw = (Map<String, Object>) request.get("hardware_specs");
 
 	    if (hw != null && !agentService.isHardwareSpecsExists(nodeId)) {
-
+	    	String nanodc_id = agentService.getNanodcIdByNodeId(nodeId);
 	        Hardware_SpecsVO specsVO = new Hardware_SpecsVO();
 	        specsVO.setNode_id(nodeId);
 
@@ -61,10 +61,17 @@ public class AgentController {
 	        specsVO.setTotal_ram_gb((String) hw.get("total_ram_gb"));
 	        specsVO.setStorage_type((String) hw.get("storage_type"));
 	        specsVO.setStorage_total_gb((String) hw.get("storage_total_gb"));
+	        specsVO.setCpu_count((String) hw.get("cpu_count"));
+	        specsVO.setGpu_count((String) hw.get("gpu_count"));
+	        specsVO.setNvme_count((String) hw.get("nvme_count"));
+	        specsVO.setNanodc_id(nanodc_id);
 
 
 	        agentService.saveHardwareSpecs(specsVO);
 	        agentService.insertInitialNodeUsageRow(nodeId);
+	     /*   if (!agentService.isNodeExists_usage(nodeId)) {
+	            agentService.insertInitialNodeUsageRow(nodeId);
+	        } */
 	        System.out.println("칼럼 세팅 완료");
 
 	    }
@@ -85,20 +92,27 @@ public class AgentController {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unknown node");
 	    }
 
+	    // 현재 노드 상태 확인
+	    String status = agentService.getStatusIdByNodeId(node_id);
+
+	    if ("pre".equalsIgnoreCase(status)) {
+	        agentService.updateNodeStatus(node_id, "active");  // 상태 업데이트 (updateNodeStatus 메소드 필요)
+	    }
+
 	    Node_UsageVO usageVO = new Node_UsageVO();
 	    usageVO.setNode_id(node_id);
 	    usageVO.setCpu_usage_percent((String) request.get("cpu_usage_percent"));
 	    usageVO.setMem_usage_percent((String) request.get("mem_usage_percent"));
 	    usageVO.setGpu_usage_percent((String) request.get("gpu_usage_percent"));
-	    usageVO.setGpu_temp((String) request.get("gpu_temp"));  // 필드명 gpu_temp_percent 아님 주의
+	    usageVO.setGpu_temp((String) request.get("gpu_temp"));
 	    usageVO.setUsed_storage_gb((String) request.get("used_storage_gb"));
 	    usageVO.setSsd_health_percent((String) request.get("ssd_health_percent"));
-
 
 	    String result = agentService.updateNodeUsage(usageVO);
 
 	    return ResponseEntity.ok(result);
 	}
+
 
 
 
