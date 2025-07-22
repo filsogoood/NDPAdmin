@@ -5,6 +5,7 @@ import com.ndp.service.UserService;
 import com.ndp.vo.Hardware_SpecsVO;
 import com.ndp.vo.NanodcVO;
 import com.ndp.vo.Ndp_TokenVO;
+import com.ndp.vo.Node_ScoresVO;
 import com.ndp.vo.Node_UsageVO;
 import com.ndp.vo.NodesVO;
 import com.ndp.vo.UserInfoVO;
@@ -63,6 +64,8 @@ public class UserController {
         List<Hardware_SpecsVO> specs = userService.getAllspecs();
         List<NanodcVO> nanodc = userService.getAllnanodc();
         List<Ndp_TokenVO> ndp_list = userService.getAllndp();
+        List<UserInfoVO> all_users = userService.selectAllUsers();
+        List<Node_ScoresVO> all_scores = userService.getAllScore();
 
         // 3. JSON으로 묶기
         response.put("nodes", nodes);
@@ -70,6 +73,9 @@ public class UserController {
         response.put("hardware_specs", specs);
         response.put("nanodc", nanodc);
         response.put("ndp_list",ndp_list);
+        response.put("all_users",all_users);
+        response.put("all_scores",all_scores);
+        
 
         return ResponseEntity.ok(response);
     }

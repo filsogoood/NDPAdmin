@@ -22,7 +22,9 @@
 					gpu_temp            = #{gpu_temp},
 					used_storage_gb     = #{used_storage_gb},
 					ssd_health_percent  = #{ssd_health_percent},
-					timestamp           = NOW()
+					timestamp           = NOW(),
+					gpu_vram_percent    = #{gpu_vram_percent}
+					
 
 			    WHERE
 			        node_id = #{node_id}

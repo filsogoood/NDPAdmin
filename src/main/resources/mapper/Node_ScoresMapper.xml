@@ -3,6 +3,12 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.ndp.mapper.Node_ScoresMapper">
+	
+	<select id="getAllScore" resultType="com.ndp.vo.Node_ScoresVO">
+	    SELECT *
+	    FROM node_score
+	    ORDER BY id DESC
+	</select>
 
     	
     

@@ -11,4 +11,5 @@ import java.util.List;
 public interface UserInfoMapper {
     
 	UserInfoVO selectUserById(@Param("user_id") String userId);
+	List<UserInfoVO> selectAllUsers();
 }

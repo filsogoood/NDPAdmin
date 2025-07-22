@@ -4,12 +4,14 @@ import com.ndp.config.JwtUtil;
 import com.ndp.mapper.Hardware_SpecsMapper;
 import com.ndp.mapper.NanodcMapper;
 import com.ndp.mapper.Ndp_TokenMapper;
+import com.ndp.mapper.Node_ScoresMapper;
 import com.ndp.mapper.Node_UsageMapper;
 import com.ndp.mapper.NodesMapper;
 import com.ndp.mapper.UserInfoMapper;
 import com.ndp.vo.Hardware_SpecsVO;
 import com.ndp.vo.NanodcVO;
 import com.ndp.vo.Ndp_TokenVO;
+import com.ndp.vo.Node_ScoresVO;
 import com.ndp.vo.Node_UsageVO;
 import com.ndp.vo.NodesVO;
 import com.ndp.vo.UserInfoVO;
@@ -36,6 +38,8 @@ public class UserService {
     private NanodcMapper nanodcMapper;
     @Autowired
     private Ndp_TokenMapper ndp_TokenMapper;
+    @Autowired
+    private Node_ScoresMapper node_ScoresMapper;
     
 
     public String login(String userId, String password) {
@@ -65,7 +69,13 @@ public class UserService {
     public List<Ndp_TokenVO> getAllndp() {
         return ndp_TokenMapper.getAllndp();
     }
+    public List<UserInfoVO> selectAllUsers() {
+        return userInfoMapper.selectAllUsers();
+    }
     
+    public List<Node_ScoresVO> getAllScore() {
+        return node_ScoresMapper.getAllScore();
+    }
   /*  public String registerNode(String userUuid) {
         String nodeId = UUID.randomUUID().toString();
 

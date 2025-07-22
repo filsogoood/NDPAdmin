@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="getNanodcIdByNodeId" resultType="String" parameterType="String">
-	    SELECT nanodc_uuid
+	    SELECT nanodc_id
 	    FROM nodes
 	    WHERE node_id = #{node_id}
 	</select>

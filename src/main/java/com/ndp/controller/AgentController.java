@@ -107,6 +107,7 @@ public class AgentController {
 	    usageVO.setGpu_temp((String) request.get("gpu_temp"));
 	    usageVO.setUsed_storage_gb((String) request.get("used_storage_gb"));
 	    usageVO.setSsd_health_percent((String) request.get("ssd_health_percent"));
+	    usageVO.setGpu_vram_percent((String) request.get("gpu_vram_percent"));
 
 	    String result = agentService.updateNodeUsage(usageVO);
 

@@ -9,7 +9,21 @@ public class UserInfoVO {
     private String userUuid;
     private String userId;
     private String password;
+    private String user_name;
+    private String ndp_address;
     
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getNdp_address() {
+		return ndp_address;
+	}
+	public void setNdp_address(String ndp_address) {
+		this.ndp_address = ndp_address;
+	}
 	public String getUserUuid() {
 		return userUuid;
 	}

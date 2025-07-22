@@ -13,5 +13,16 @@
 	        FROM user_info
 	        WHERE user_id = #{user_id}
 	    </select>
+	    
+	    <select id="selectAllUsers" resultType="com.ndp.vo.UserInfoVO">
+		    SELECT
+		        id,
+		        user_uuid,
+		        user_id,
+		        user_name,
+		        ndp_address
+			FROM user_info
+		</select>
+
     
 </mapper>
