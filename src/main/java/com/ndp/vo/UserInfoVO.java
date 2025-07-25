@@ -11,6 +11,7 @@ public class UserInfoVO {
     private String password;
     private String user_name;
     private String ndp_address;
+    private String nanodc_id;
     
 	public String getUser_name() {
 		return user_name;
@@ -47,5 +48,11 @@ public class UserInfoVO {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getNanodc_id() {
+		return nanodc_id;
+	}
+	public void setNanodc_id(String nanodc_id) {
+		this.nanodc_id = nanodc_id;
 	}
 }

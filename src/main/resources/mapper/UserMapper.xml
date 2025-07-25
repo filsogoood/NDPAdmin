@@ -20,7 +20,8 @@
 		        user_uuid,
 		        user_id,
 		        user_name,
-		        ndp_address
+		        ndp_address,
+		        nanodc_id
 			FROM user_info
 		</select>
 
