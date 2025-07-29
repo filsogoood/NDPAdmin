@@ -46,6 +46,21 @@ public class AgentService {
         }
     }
     
+    public String updateNodeNameByNodeId(String nodeId, String node_name, String nanodc_id) {
+        NodesVO node = new NodesVO();
+        node.setNode_name(node_name);
+        node.setNanodc_id(nanodc_id);
+        node.setNode_id(nodeId);
+
+        int result = nodesMapper.updateNodeNameByNodeId(node);
+
+        if (result > 0) {
+            return "success";
+        } else {
+            return "fail";
+        }
+    }
+    
     public boolean isNodeExists(String nodeId) {
         int count = nodesMapper.checkNodeExists(nodeId);
         return count > 0;
@@ -84,6 +99,8 @@ public class AgentService {
             return "fail";
         }
     }
+    
+    
     
     public boolean isNodeExists_usage(String nodeId) {
         return node_UsageMapper.isNodeExists(nodeId) > 0;

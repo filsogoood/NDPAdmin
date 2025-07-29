@@ -16,6 +16,7 @@ public class Node_UsageVO {
     private String used_storage_gb;
     private String ssd_health_percent;
     private String gpu_vram_percent;
+    private String harddisk_used_percent;
 
     public int getId() {
         return id;
@@ -95,5 +96,13 @@ public class Node_UsageVO {
 
 	public void setGpu_vram_percent(String gpu_vram_percent) {
 		this.gpu_vram_percent = gpu_vram_percent;
+	}
+
+	public String getHarddisk_used_percent() {
+		return harddisk_used_percent;
+	}
+
+	public void setHarddisk_used_percent(String harddisk_used_percent) {
+		this.harddisk_used_percent = harddisk_used_percent;
 	}
 }

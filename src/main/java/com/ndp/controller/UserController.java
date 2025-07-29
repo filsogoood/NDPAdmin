@@ -17,9 +17,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -79,5 +83,85 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
+    
+    @GetMapping("/tlong/data")
+    public ResponseEntity<Map<String, Object>> getTlong_DashboardData(
+            @RequestParam("nanodc_id") String nanodcId) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        // 전체 데이터 조회
+        List<NodesVO> nodesAll = userService.getAllNodes();
+        List<Hardware_SpecsVO> specsAll = userService.getAllspecs();
+        List<NanodcVO> nanodcAll = userService.getAllnanodc();
+        List<Node_UsageVO> usageAll = userService.getAllused();
+        List<Ndp_TokenVO> ndp_list = userService.getAllndp();
+        List<Node_ScoresVO> all_scores = userService.getAllScore();
+
+        // nanodc_id 기준 필터링 (Java 8 Stream API 사용)
+        List<NodesVO> nodes = new ArrayList<>();
+        for (NodesVO n : nodesAll) {
+            if (nanodcId.equals(n.getNanodc_id())) {
+                nodes.add(n);
+            }
+        }
+
+        List<Hardware_SpecsVO> specs = new ArrayList<>();
+        for (Hardware_SpecsVO s : specsAll) {
+            if (nanodcId.equals(s.getNanodc_id())) {
+                specs.add(s);
+            }
+        }
+
+        List<NanodcVO> nanodc = new ArrayList<>();
+        for (NanodcVO n : nanodcAll) {
+            if (nanodcId.equals(n.getNanodc_id())) {
+                nanodc.add(n);
+            }
+        }
+
+        // nodes에서 node_id 목록 추출
+        Set<String> nodeIdSet = new HashSet<>();
+        for (NodesVO n : nodes) {
+            nodeIdSet.add(n.getNode_id());
+        }
+
+        // node_usage 필터링
+        List<Node_UsageVO> usage = new ArrayList<>();
+        for (Node_UsageVO u : usageAll) {
+            if (nodeIdSet.contains(u.getNode_id())) {
+                usage.add(u);
+            }
+        }
+        
+        List<Node_ScoresVO> scores = new ArrayList<>();
+        for (Node_ScoresVO s : all_scores) {
+            if (nodeIdSet.contains(s.getNode_id())) {
+                scores.add(s);
+            }
+        }
+        
+        List<Ndp_TokenVO> ndpListFiltered = new ArrayList<>();
+        for (Ndp_TokenVO n : ndp_list) {
+            if (nodeIdSet.contains(n.getNode_id())) {
+                ndpListFiltered.add(n);
+            }
+        }
+
+        
+
+        // 결과 구성
+        response.put("nodes", nodes);
+        response.put("hardware_specs", specs);
+        response.put("nanodc", nanodc);
+        response.put("node_usage", usage);
+        response.put("ndpListFiltered", ndpListFiltered);
+        response.put("scores", scores);
+
+        return ResponseEntity.ok(response);
+    }
+
+
+   
 
 }

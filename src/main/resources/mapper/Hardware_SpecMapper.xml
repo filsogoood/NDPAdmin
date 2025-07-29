@@ -6,9 +6,9 @@
 
     	<insert id="insertHardwareSpecs" parameterType="com.ndp.vo.Hardware_SpecsVO">
 		    INSERT INTO hardware_specs
-		        (node_id, cpu_model, cpucores, gpu_model, gpu_vram_gb, total_ram_gb, storage_type, storage_total_gb, cpu_count, gpu_count, nvme_count,nanodc_id)
+		        (node_id, cpu_model, cpucores, gpu_model, gpu_vram_gb, total_ram_gb, storage_type, storage_total_gb, cpu_count, gpu_count, nvme_count,nanodc_id, total_harddisk_gb)
 		    VALUES
-		        (#{node_id}, #{cpu_model}, #{cpucores}, #{gpu_model}, #{gpu_vram_gb}, #{total_ram_gb}, #{storage_type}, #{storage_total_gb}, #{cpu_count}, #{gpu_count}, #{nvme_count}, #{nanodc_id});
+		        (#{node_id}, #{cpu_model}, #{cpucores}, #{gpu_model}, #{gpu_vram_gb}, #{total_ram_gb}, #{storage_type}, #{storage_total_gb}, #{cpu_count}, #{gpu_count}, #{nvme_count}, #{nanodc_id}, #{total_harddisk_gb});
 		</insert>
 		
 		<select id="checkHardwareSpecsExists" resultType="int" parameterType="String">

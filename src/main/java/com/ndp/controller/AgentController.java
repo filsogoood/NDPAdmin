@@ -65,13 +65,20 @@ public class AgentController {
 	        specsVO.setGpu_count((String) hw.get("gpu_count"));
 	        specsVO.setNvme_count((String) hw.get("nvme_count"));
 	        specsVO.setNanodc_id(nanodc_id);
+	        specsVO.setTotal_harddisk_gb((String) hw.get("total_harddisk_gb"));
 
 
 	        agentService.saveHardwareSpecs(specsVO);
 	        agentService.insertInitialNodeUsageRow(nodeId);
+	        String nodeName = hw.get("node_name") != null ? hw.get("node_name").toString() : null;
+	        String nanoDcId = hw.get("nanodc_id") != null ? hw.get("nanodc_id").toString() : null;
+
+	        agentService.updateNodeNameByNodeId(nodeId, nodeName, nanoDcId);
+
 	     /*   if (!agentService.isNodeExists_usage(nodeId)) {
 	            agentService.insertInitialNodeUsageRow(nodeId);
 	        } */
+
 	        System.out.println("칼럼 세팅 완료");
 
 	    }
@@ -108,6 +115,9 @@ public class AgentController {
 	    usageVO.setUsed_storage_gb((String) request.get("used_storage_gb"));
 	    usageVO.setSsd_health_percent((String) request.get("ssd_health_percent"));
 	    usageVO.setGpu_vram_percent((String) request.get("gpu_vram_percent"));
+	    usageVO.setGpu_vram_percent((String) request.get("gpu_vram_percent"));
+	    usageVO.setHarddisk_used_percent((String) request.get("harddisk_used_percent"));
+	    
 
 	    String result = agentService.updateNodeUsage(usageVO);
 

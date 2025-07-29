@@ -18,6 +18,7 @@ public class Hardware_SpecsVO {
     private String gpu_count;
     private String nvme_count;
     private String nanodc_id;
+    private String total_harddisk_gb;
 
     public int getId() {
         return id;
@@ -123,5 +124,13 @@ public class Hardware_SpecsVO {
 
 	public void setNanodc_id(String nanodc_id) {
 		this.nanodc_id = nanodc_id;
+	}
+
+	public String getTotal_harddisk_gb() {
+		return total_harddisk_gb;
+	}
+
+	public void setTotal_harddisk_gb(String total_harddisk_gb) {
+		this.total_harddisk_gb = total_harddisk_gb;
 	}
 }

@@ -13,6 +13,15 @@
 	        node_id = #{node_id}
 	</update>
 	
+	<update id="updateNodeNameByNodeId" parameterType="com.ndp.vo.NodesVO">
+	    UPDATE nodes
+	    SET
+	        node_name = #{node_name},
+	        nanodc_id = #{nanodc_id}
+	    WHERE
+	        node_id = #{node_id}
+	</update>
+	
 	<select id="checkNodeExists" resultType="int" parameterType="String">
 	    SELECT COUNT(1)
 	    FROM nodes
@@ -37,6 +46,8 @@
 	    FROM nodes
 	    ORDER BY id DESC
 	</select>
+	
+	
 
 
     	
